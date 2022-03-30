@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+							<!-- Banner -->
+								<section id="banner">
+									<div class="content">
+										<header>
+											<h1>{{ category.name }}</h1>
+<!--											<p>A free and fully responsive site template</p>-->
+										</header>
+										<p>WELCOME TO KYRGYZSTAN
+											  Located in the heart of Central Asia. Semi-desert wedged between lakes and alpine forests,
+											  unexplored mountains, fertile plains and nomadic traditions have created the peculiarities of Kyrgyzstan.
+											  Lovely handmade products were sold in this shop. The products are very unique using natural resources.
+											  Felt products are using merino wools and coloring are done by natural plant.
+										</p>
+
+										{% if category.get_children %}
+										{% for child in category.get_children %}
+											<a href="{% url 'category' child.slug %}"><li>{{ child.name }}</li></a>
+										{% endfor %}
+										{% endif %}
+
+									</div>
+									<span class="image object">
+										<img src="{{ category.image.url }}" style="width:500px; height:500px;" alt="" />
+									</span>
+								</section>
+
+							<!-- Section -->
+						{% if not category.get_children %}
+								<section>
+									<header class="major">
+										<h2>Ipsum sed dolor</h2>
+									</header>
+									<div class="posts">
+										{% for product in products %}
+										<article>
+											<a href="#" class="image"><img src="{{ product.get_image }}" style="width:200px; height:200px;" alt="" /></a>
+											<h3>{{ product }}</h3>
+											<p>{{ product.description|truncatewords:10 }}</p>
+											<ul class="actions">
+												<li><a href="{% url 'detail' product.id %}" class="button">More</a></li>
+											</ul>
+										</article>
+										{% endfor %}
+									</div>
+								</section>
+						{% endif %}
+{% endblock content %}
+

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Welcome to Nomad Shop</h1>
+									</header>
+<span class="image main"><img src="{% static 'images/clothes.jpeg' %}" style="width:250; height:200;" alt="" /></span>
+									<p>Kyrgyzstan is a mountainous country in Central Asia. It is located along the Silk Road, an ancient trade route between China and the Mediterranean. The Tien Shan mountains, which surround this caravan route and occupy most of the country, are inhabited by snow leopards, lynxes and sheep. In the south of the country is the city of Osh, whose history goes back more than a thousand years. It is famous for its huge bazaar, where merchants who followed the Great Silk Road once stopped.</p>
+									<p>
+You can find in our catalog many products of the highest class masters - from felt products to finely crafted marble products.
+
+A wide range also includes original gifts for all occasions. Order with delivery throughout Bishkek, Kyrgyzstan - the prices will pleasantly surprise you with their availability, and sometimes discounts and low cost.</p>
+
+									{% if messages %}
+								<ul class="messages">
+									{% for message in messages %}
+									</div>
+									<div class="alert alert-success" role="alert">{{ message }}</div>
+									{% endfor %}
+								</ul>
+								{% endif %}
+
+
+
+									<hr class="major" />
+
+
+									<div class="posts">
+										{% for product in page_obj %}
+										<article>
+											<a href="#" class="image"><img src="{{ product.get_image }}" style="width:200px; height:200px;" alt="" /></a>
+											<h3>{{ product }}</h3>
+											<p>{{ product.description|truncatewords:10 }}</p>
+											<ul class="actions">
+												<li><a href="{% url 'detail' product.id %}" class="button">More</a></li>
+											</ul>
+										</article>
+										{% endfor %}
+									</div>
+
+								</section>
+<nav aria-label="...">
+  <ul class="pagination pagination-sm">
+		{% if page_obj.has_previous %}
+
+		<li class="page-item"><a class="page-link" href="{% url 'home' %}?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }} </a></li>
+		{% endif %}
+    <li class="page-item active" aria-current="page">
+      <span class="page-link">{{ page_obj.number }}</span>
+    </li>
+		{% if page_obj.has_next %}
+    <li class="page-item"><a class="page-link" href="{% url 'home' %}?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+  {% endif %}
+	</ul>
+</nav>
+{% endblock content %}
+
