@@ -127,3 +127,16 @@ LOGOUT_REDIRECT_URL = '/cooking'
 
 
 from .local_settings import *
+
+SECRET_KEY = 'django-insecure-f)64v)xqk+x%a^*(u+3%$*$kwrb6277iwg%d5ctjkw5=m52@w('
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'nomadkg',
+        'USER': 'admins',
+        'PASSWORD': '1',
+        'HOST': 'localhost',
+        'PORT': 5432
+    }
+}
